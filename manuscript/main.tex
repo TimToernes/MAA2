@@ -1,0 +1,140 @@
+%\documentclass[11pt,a4paper,english,twocolumn]{article}
+\documentclass[11pt,a4paper,english]{article}
+% Graphics packages 
+\usepackage{graphicx}
+% Include the Euro character
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,textcomp}
+
+% Line numbering
+%\usepackage[switch,columnwise]{lineno}
+%\linenumbers
+
+% Math Package
+\usepackage{mathtools}
+\usepackage{amsmath}
+% Bibliography package 
+\usepackage[backend=bibtex, style=numeric,citestyle=numeric,sorting=none, backref=none, backrefstyle=all+]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+	
+The goal of this method is to evenly sample the near-optimal feasible decision space of a linear optimization model using a Markov chain random walk algorithm.
+	
+\section{Model}
+
+The model under consideration is linear and convex and can be written on the standard form: 
+
+\begin{align}\label{eq:ConvexOptimization}
+\text{minimize} \;&\; \mathbf{f}_0(\mathbf{x})  \\
+	\text{subject to} \; &\; \mathbf{f}_i(\mathbf{x}) \leq 0 \; \; i=1...m\\
+\;            &\;  \mathbf{h}_j(\mathbf{x}) = 0 \; \; j=1...p
+\end{align}
+
+Besides from the constraints contained in the original optimization problem, an additional constraint is introduced, to separate the near-optimal feasible space, from the entire feasible space. 
+\begin{equation}\label{eq:MGA_const}
+f_0(\mathbf{x}) \leq f_0(\mathbf{\hat{x}})\cdot (1+\epsilon)
+\end{equation}
+
+Where $f_0(\mathbf{\hat{x}})$ is the objective value for the optimal solution. 
+
+As the constraints are linear they can be written as matrix products on the form: 
+
+\begin{align}
+\mathbf{f}_i(\mathbf{x}) \leq 0 \to A  \mathbf{x}  \leq \mathbf{b} \\
+\mathbf{h}_j(\mathbf{x}) = 0 \to H  \mathbf{x} = \mathbf{c}
+\end{align}
+
+The set containing all feasible near-optimal solutions then become:
+\begin{equation}
+F = \{\mathbf{x} \in \mathbf{R}^n | A  \mathbf{x}  \leq \mathbf{b} | H  \mathbf{x} = \mathbf{c} \}
+\end{equation}
+
+
+\section{Presolve}
+
+In order to perform Markov chain random walk sampling a fully dimensional space is required. As several equalities are included in the definition of $F$ and the inequalities might include bounds constraining variable ranges to zero, the fully dimensional subspace of $F$ must be found.
+
+The goal of the presolve process is to define the fully dimensional subspace $Z$ of $F$. 
+
+% step 1
+Initially all linearly dependent constraints/rows in the augmented matrix $[ A|\mathbf{b}] $ are identified. Linearly dependent constraints/rows, span parallel hyper-planes in $F$. If two such hyper-planes were to coincide, and have normal vectors pointing in opposite directions, they constrain a dimension of $F$ and can be represented as an equality rather than two inequalities. For all such inequality constraints constraining a dimension of $F$, their given row in $A$ are moved from the matrix $A$ to the $H$ matrix.
+
+% step 2
+From \cite{ConvexOpimization} (p. 523) we know that the problem can be reformulated as: 
+
+\begin{align}
+\text{minimize} \;&\; \mathbf{f}_0(\mathbf{\hat{x}} + N \mathbf{z})  \\
+\text{subject to} \; &\; A(\mathbf{\hat{x}} + N \mathbf{z}) \leq \mathbf{b} \; \; i=1...m\\
+\;            &\;  span(N) = null(H)
+\end{align}
+
+Where the span of $N$ is the null space of $H$ and $\mathbf{\hat{x}}$ is any particular solution contained in $F$.
+Knowing this, the fully dimensional subspace of $F$ can be defined as:
+
+\begin{equation}
+Z = \{\mathbf{z} \in \mathbf{R}^{n-p} | A(\mathbf{\hat{x}} +  N \mathbf{z}) <= \mathbf{b}  \}
+\end{equation}
+
+Using this the optimization problem can be reformulated as:
+
+\begin{align}
+	\text{minimize} \;&\; \mathbf{f}_0(\mathbf{\hat{x}} + N \mathbf{z})  \\
+	\text{subject to} \; &\; \hat{A}\mathbf{z} \leq \mathbf{\hat{b}} \label{eq:sub_problem}\\
+	\;            &\;  \hat{A} = A \cdot N \\ 
+	\;			& \; \mathbf{\hat{b}} = \mathbf{b}- A\mathbf{\hat{x}}
+\end{align}
+
+By validating that the matrix $\hat{A}$ has full rank, we know that the subspace $\mathbf{z}$ is fully dimensional. 
+
+\section{Markov chain random walk}
+
+A version of the random walk algorithm, is used to sample the subspace $Z$. The algorithm consist of an iterative process of drawing random directions, and taking steps of random lengths within the space $Z$. 
+
+Initially a point $\mathbf{z}_0$ inside the space $Z$ must be provided. Random steps inside Z are then taken by generating a random direction $\theta$ and taking a random step $t$ that will not violate the boundaries of $Z$. 
+
+\begin{equation}\label{eq:step}
+	\mathbf{z}_{i+1} = \mathbf{z}_i + \theta t
+\end{equation}
+
+%todo update this 
+$\theta$ must be a unit vector pointing in a random direction evenly distributed on a unit hyper sphere $\mathbf{S}^{n-p}$. I will elaborate on how to do so!!!
+
+To determine the range of $t$ that ensures that the step $t$ does not cross the boundary of $Z$, Equation \ref{eq:step} is substituded in to Equation \ref{eq:sub_problem}.
+
+\begin{equation}
+	\hat{A}(\mathbf{z}_i + \theta t) \leq \hat{b}
+\end{equation}
+
+Isolating $t$ will result in the upper and lower bounds:
+
+\begin{align}
+t \leq \frac{\hat{b}-\hat{A}\mathbf{z}_i}{\hat{A}\theta}& \; \text{if }  \; \hat{A}\theta>0\\
+t \geq \frac{\hat{b}-\hat{A}\mathbf{z}_i}{\hat{A}\theta}& \; \text{if }  \; \hat{A}\theta<0
+\end{align}
+
+Selecting $t$ to be:
+
+\begin{equation}
+	t = (t_{max}-t_{min})r+t_{min}
+\end{equation}
+
+Where $r$ is a random number drawn from a uniform distribution between 0-1. 
+
+Repeating the process of generating random directions $\theta$ and taking random step lengths $t$, will, if enough samples are drawn, generate a uniform sampling of the near optimal feasible set $Z$. Storing all samples $z_i$ in the discrete set $Z^* = {z_i \forall i=0..d}$ where $d$ is the number of samples.
+
+\section{Decrush}
+
+Having sampled $Z$, these sample points must be reverted back to the $F$ domain. This is done with a so called decrush algorithm. 
+
+\begin{equation}
+	\mathbf{x}_i = N \mathbf{z}_i + \mathbf{\hat{x}}
+\end{equation}
+
+Repeating this for all samples a set containing $d$ samples in $F$ is obtained. 
+
+
+\clearpage
+\printbibliography
+
+\end{document}
