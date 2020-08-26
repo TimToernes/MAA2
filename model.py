@@ -8,8 +8,8 @@ import numpy as np
 import pypsa
 from pypsa.linopt import get_var, linexpr, join_exprs, define_constraints, get_dual, get_con, write_objective
 import os 
-#dir_path = os.path.dirname(os.path.realpath(__file__))
-#os.chdir(dir_path)
+dir_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(dir_path)
 import pyomo.environ as pyomo_env
 from pyomo.core import ComponentUID
 import pickle
@@ -164,7 +164,7 @@ if __name__ == '__main__':
         #model = pypsa.opf.network_lopf_build_model(network)
         #test = model.write("test.lp")
 
-        network.lopf(formulation='angles')
+        network.lopf(formulation='angles',solver_name='gurobi',)
         old_objective_value = network.objective
         model = network.model
         MGA_slack = 0.5

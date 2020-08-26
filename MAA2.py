@@ -187,7 +187,7 @@ m_reduced.optimize()
 z_0 = x.X
 
 #%%
-n_samples = 1000
+n_samples = 100000
 z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples)
 x_samples = decrush(z_samples,N,x_0)
 x_samples_uncut = x_samples.copy()
