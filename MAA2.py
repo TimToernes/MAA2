@@ -1,4 +1,7 @@
 #%%
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(dir_path)
 import pypsa
 from pyomo.core import ComponentUID
 import gurobipy as gp

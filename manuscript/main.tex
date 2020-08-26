@@ -87,9 +87,9 @@ Using this the optimization problem can be reformulated as:
 
 By validating that the matrix $\hat{A}$ has full rank, we know that the subspace $\mathbf{z}$ is fully dimensional. 
 
-\section{Markov chain random walk}
+\section{Monte carlo hit and run sampling}
 
-A version of the random walk algorithm, is used to sample the subspace $Z$. The algorithm consist of an iterative process of drawing random directions, and taking steps of random lengths within the space $Z$. 
+A version of the random walk algorithm \cite{Smith1984}, is used to sample the subspace $Z$. The algorithm consist of an iterative process of drawing random directions, and taking steps of random lengths within the space $Z$. 
 
 Initially a point $\mathbf{z}_0$ inside the space $Z$ must be provided. Random steps inside Z are then taken by generating a random direction $\theta$ and taking a random step $t$ that will not violate the boundaries of $Z$. 
 
@@ -122,6 +122,9 @@ Selecting $t$ to be:
 Where $r$ is a random number drawn from a uniform distribution between 0-1. 
 
 Repeating the process of generating random directions $\theta$ and taking random step lengths $t$, will, if enough samples are drawn, generate a uniform sampling of the near optimal feasible set $Z$. Storing all samples $z_i$ in the discrete set $Z^* = {z_i \forall i=0..d}$ where $d$ is the number of samples.
+
+
+"The reason that the Markov chain corresponding to the iterates XO, XI,X2, . . . converges in distribu-tion to a uniform distribution over S is easily seen from the fact that 1) it is possible to go from any point in S to a neighborhood of any other point in one step, and 2 ) the uniform distribution is a stationary distribution of the chain." \cite{Smith1996}
 
 \section{Decrush}
 
