@@ -19,7 +19,7 @@
 
 \begin{document}
 	
-The goal of this method is to evenly sample the near-optimal feasible decision space of a linear optimization model using a Markov chain random walk algorithm.
+The goal of this method is to evenly sample the near-optimal feasible decision space of a linear optimization model using a version of Markov Chain Monte Carlo sampling named the hit and run algorithm.
 	
 \section{Model}
 
@@ -31,29 +31,29 @@ The model under consideration is linear and convex and can be written on the sta
 \;            &\;  \mathbf{h}_j(\mathbf{x}) = 0 \; \; j=1...p
 \end{align}
 
-Besides from the constraints contained in the original optimization problem, an additional constraint is introduced, to separate the near-optimal feasible space, from the entire feasible space. 
+With $\mathbf{x}\in \mathbf{R}^n$. Besides from the constraints contained in the original optimization problem, an additional constraint is introduced, to separate the near-optimal feasible space, from the entire feasible space. 
 \begin{equation}\label{eq:MGA_const}
 f_0(\mathbf{x}) \leq f_0(\mathbf{\hat{x}})\cdot (1+\epsilon)
 \end{equation}
 
-Where $f_0(\mathbf{\hat{x}})$ is the objective value for the optimal solution. 
+Where $\mathbf{\hat{x}}$ is an optimal solution to the original problem and $f_0(\mathbf{\hat{x}})$ is the objective value for the optimal solution. The slack on optimality is given by the slack variable $\theta$ .
 
 As the constraints are linear they can be written as matrix products on the form: 
 
 \begin{align}
-\mathbf{f}_i(\mathbf{x}) \leq 0 \to A  \mathbf{x}  \leq \mathbf{b} \\
-\mathbf{h}_j(\mathbf{x}) = 0 \to H  \mathbf{x} = \mathbf{c}
+\mathbf{f}_i(\mathbf{x}) \leq 0 \Rightarrow A  \mathbf{x}  \leq \mathbf{b} \\
+\mathbf{h}_j(\mathbf{x}) = 0 \Rightarrow H  \mathbf{x} = \mathbf{c}
 \end{align}
 
 The set containing all feasible near-optimal solutions then become:
 \begin{equation}
-F = \{\mathbf{x} \in \mathbf{R}^n | A  \mathbf{x}  \leq \mathbf{b} | H  \mathbf{x} = \mathbf{c} \}
+F = \{\mathbf{x} \in \mathbf{R}^n | A  \mathbf{x}  \leq \mathbf{b} \wedge H  \mathbf{x} = \mathbf{c} \}
 \end{equation}
 
 
 \section{Presolve}
 
-In order to perform Markov chain random walk sampling a fully dimensional space is required. As several equalities are included in the definition of $F$ and the inequalities might include bounds constraining variable ranges to zero, the fully dimensional subspace of $F$ must be found.
+In order to apply the hit and run sampling algorithm, a fully dimensional space is required. As several equalities are included in the definition of $F$ and hidden equalities might be found among the inequality constraints, the fully dimensional subspace of $F$ must be found. Hidden equalities occur when two inequalities limit the range of a variable to zero. 
 
 The goal of the presolve process is to define the fully dimensional subspace $Z$ of $F$. 
 
@@ -66,11 +66,11 @@ From \cite{ConvexOpimization} (p. 523) we know that the problem can be reformula
 \begin{align}
 \text{minimize} \;&\; \mathbf{f}_0(\mathbf{\hat{x}} + N \mathbf{z})  \\
 \text{subject to} \; &\; A(\mathbf{\hat{x}} + N \mathbf{z}) \leq \mathbf{b} \; \; i=1...m\\
-\;            &\;  span(N) = null(H)
+\;            &\;  span(N) = \mathcal{N}(H)
 \end{align}
 
 Where the span of $N$ is the null space of $H$ and $\mathbf{\hat{x}}$ is any particular solution contained in $F$.
-Knowing this, the fully dimensional subspace of $F$ can be defined as:
+As all equalities have been eliminated from the problem, the fully dimensional subspace of $F$ can be defined as:
 
 \begin{equation}
 Z = \{\mathbf{z} \in \mathbf{R}^{n-p} | A(\mathbf{\hat{x}} +  N \mathbf{z}) <= \mathbf{b}  \}
@@ -80,16 +80,21 @@ Using this the optimization problem can be reformulated as:
 
 \begin{align}
 	\text{minimize} \;&\; \mathbf{f}_0(\mathbf{\hat{x}} + N \mathbf{z})  \\
-	\text{subject to} \; &\; \hat{A}\mathbf{z} \leq \mathbf{\hat{b}} \label{eq:sub_problem}\\
+	\text{subject to} \; &\; \hat{A}\mathbf{z} \leq \mathbf{\hat{b}} \label{eq:sub_problem}
+\end{align}
+
+With $\hat{A}$ and $ \mathbf{\hat{b}}$:
+
+\begin{align}
 	\;            &\;  \hat{A} = A \cdot N \\ 
 	\;			& \; \mathbf{\hat{b}} = \mathbf{b}- A\mathbf{\hat{x}}
 \end{align}
 
-By validating that the matrix $\hat{A}$ has full rank, we know that the subspace $\mathbf{z}$ is fully dimensional. 
+By validating that the matrix $\hat{A}$ has full rank, we know that the subspace $Z$ is fully dimensional. 
 
-\section{Monte carlo hit and run sampling}
+\section{Hit and run sampling}
 
-A version of the random walk algorithm \cite{Smith1984}, is used to sample the subspace $Z$. The algorithm consist of an iterative process of drawing random directions, and taking steps of random lengths within the space $Z$. 
+A version of the hit and run algorithm \cite{Smith1984}, is used to sample the subspace $Z$. The algorithm consist of an iterative process of drawing random directions, and taking steps of random lengths within the space $Z$. 
 
 Initially a point $\mathbf{z}_0$ inside the space $Z$ must be provided. Random steps inside Z are then taken by generating a random direction $\theta$ and taking a random step $t$ that will not violate the boundaries of $Z$. 
 
@@ -98,7 +103,7 @@ Initially a point $\mathbf{z}_0$ inside the space $Z$ must be provided. Random s
 \end{equation}
 
 %todo update this 
-$\theta$ must be a unit vector pointing in a random direction evenly distributed on a unit hyper sphere $\mathbf{S}^{n-p}$. I will elaborate on how to do so!!!
+$\theta$ must be a unit vector pointing in a random direction evenly distributed on a unit hyper sphere $\mathbf{S}^{n-p}$. I will elaborate on how to do so!!! But this is easy.
 
 To determine the range of $t$ that ensures that the step $t$ does not cross the boundary of $Z$, Equation \ref{eq:step} is substituded in to Equation \ref{eq:sub_problem}.
 
@@ -109,8 +114,8 @@ To determine the range of $t$ that ensures that the step $t$ does not cross the 
 Isolating $t$ will result in the upper and lower bounds:
 
 \begin{align}
-t \leq \frac{\hat{b}-\hat{A}\mathbf{z}_i}{\hat{A}\theta}& \; \text{if }  \; \hat{A}\theta>0\\
-t \geq \frac{\hat{b}-\hat{A}\mathbf{z}_i}{\hat{A}\theta}& \; \text{if }  \; \hat{A}\theta<0
+t_{max} =  \text{inf} \frac{\hat{b}-\hat{A}\mathbf{z}_i}{\hat{A}\theta}& \; \text{given }  \; \hat{A}\theta>0\\
+t_{min} = \text{sup} \frac{\hat{b}-\hat{A}\mathbf{z}_i}{\hat{A}\theta}& \; \text{given }  \; \hat{A}\theta<0
 \end{align}
 
 Selecting $t$ to be:
@@ -121,10 +126,13 @@ Selecting $t$ to be:
 
 Where $r$ is a random number drawn from a uniform distribution between 0-1. 
 
-Repeating the process of generating random directions $\theta$ and taking random step lengths $t$, will, if enough samples are drawn, generate a uniform sampling of the near optimal feasible set $Z$. Storing all samples $z_i$ in the discrete set $Z^* = {z_i \forall i=0..d}$ where $d$ is the number of samples.
+Repeating the process of generating random directions $\theta$ and taking random step lengths $t$, will, if enough samples are drawn, generate a uniform sampling of the near optimal feasible set $Z$. Storing all samples $z_i$ in the discrete set $Z^* = {z_i \forall i=0..d}$ where $d$ is the number of samples.\\
 
 
-"The reason that the Markov chain corresponding to the iterates XO, XI,X2, . . . converges in distribu-tion to a uniform distribution over S is easily seen from the fact that 1) it is possible to go from any point in S to a neighborhood of any other point in one step, and 2 ) the uniform distribution is a stationary distribution of the chain." \cite{Smith1996}
+"The reason that the Markov chain corresponding to the iterates $Z_0,Z_1,...,Z_d$ converges in distribution to a uniform distribution over $Z$ is easily seen from the fact that 1) it is possible to go from any point in $Z$ to a neighborhood of any other point in one step, and 2 ) the uniform distribution is a stationary distribution of the chain." \cite{Smith1996}\\
+
+
+The hit and run algorithm is $md$ hard \cite{Belisle1998}. Where m is the number of constraints and d is the number of variables. 
 
 \section{Decrush}
 
@@ -136,6 +144,12 @@ Having sampled $Z$, these sample points must be reverted back to the $F$ domain.
 
 Repeating this for all samples a set containing $d$ samples in $F$ is obtained. 
 
+\section{Further work}
+
+Figure out if sampling $Z$ evenly, generates evenly distributed samples in $F$ when samples are maped from $Z$ to $F$. \\
+
+As of now, i have had sucess with applying the method on problems with $n\approx 10.000$, and i believe that $n\approx 100.000$ is doable on a better pc. This is however one to two order of magnitude from the $1.000.000+$ variables included in most modern energy system optimization models. Therefore i have considered two options. 1) Using decomposition methods, such as Benders decomposition to decompose the problem in to manageable sub-problems. Specifically it is only the non-timedependable variables that are truly of interest, and as these only make up $\approx 1000$ of the variables in the energy system model. By decomposing the timedependable variables from the non-timedependable variables, and sampling the non-timedependable subspace, could be a solution. I have, however, not managed to figure out if this is a viable solution, as decomposition methods often require several iterations between the two sub-problems.  
+2) The largest contributor to the large number of variables in energy system models, is the time-series data used. By generating augmented time-series, using techniques such as self organizing maps \cite{Hasan2019}, one can generate shorter time-series, thereby reducing the problem. This is however, a less favorable option than solution (1) as using augmented time-series 
 
 \clearpage
 \printbibliography

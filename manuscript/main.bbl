@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.1 $
+% $ biblatex bbl format version 2.9 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -41,6 +41,156 @@
     \field{labeltitlesource}{title}
     \field{title}{Convex Optimization}
     \field{year}{2004}
+  \endentry
+
+  \entry{Smith1984}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SRL}{%
+         family={Smith},
+         familyi={S\bibinitperiod},
+         given={Robert\bibnamedelima L.},
+         giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SRL2}
+    \strng{fullhash}{SRL2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1287/opre.32.6.1296
+    \endverb
+    \verb{eprint}
+    \verb https://doi.org/10.1287/opre.32.6.1296
+    \endverb
+    \field{number}{6}
+    \field{pages}{1296\bibrangedash 1308}
+    \field{title}{Efficient Monte Carlo Procedures for Generating Points
+  Uniformly Distributed over Bounded Regions}
+    \verb{url}
+    \verb https://doi.org/10.1287/opre.32.6.1296
+    \endverb
+    \field{volume}{32}
+    \field{journaltitle}{Operations Research}
+    \field{year}{1984}
+  \endentry
+
+  \entry{Smith1996}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=SRL}{%
+         family={{Smith}},
+         familyi={S\bibinitperiod},
+         given={R.\bibnamedelima L.},
+         giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SRL1}
+    \strng{fullhash}{SRL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings Winter Simulation Conference}
+    \field{pages}{260\bibrangedash 264}
+    \field{title}{The hit-and-run sampler: a globally reaching markov chain
+  sampler for generating arbitrary multivariate distributions}
+    \field{year}{1996}
+  \endentry
+
+  \entry{Belisle1998}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BC}{%
+         family={Belisle},
+         familyi={B\bibinitperiod},
+         given={Claude},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Boneh},
+         familyi={B\bibinitperiod},
+         given={Arnon},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CR}{%
+         family={Caron},
+         familyi={C\bibinitperiod},
+         given={Richard},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BCBACR1}
+    \strng{fullhash}{BCBACR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1080/15326349808807500
+    \endverb
+    \field{title}{Convergence properties of Hit-and-Run samplers}
+    \field{volume}{14}
+    \field{journaltitle}{Communications in Statistics. Stochastic Models}
+    \field{month}{01}
+    \field{year}{1998}
+  \endentry
+
+  \entry{Hasan2019}{article}{}
+    \name{author}{6}{}{%
+      {{hash=YHU}{%
+         family={Yilmaz},
+         familyi={Y\bibinitperiod},
+         given={Hasan\bibnamedelima Umitcan},
+         giveni={H\bibinitperiod\bibinitdelim U\bibinitperiod},
+      }}%
+      {{hash=FE}{%
+         family={Fouche},
+         familyi={F\bibinitperiod},
+         given={Edouard},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=DT}{%
+         family={Dengiz},
+         familyi={D\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=KL}{%
+         family={Krauss},
+         familyi={K\bibinitperiod},
+         given={Lucas},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Keles},
+         familyi={K\bibinitperiod},
+         given={Dogan},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=FW}{%
+         family={Fichtner},
+         familyi={F\bibinitperiod},
+         given={Wolf},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {De Gruyter Oldenbourg}%
+    }
+    \strng{namehash}{YHU+1}
+    \strng{fullhash}{YHUFEDTKLKDFW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb https://doi.org/10.1515/itit-2019-0025
+    \endverb
+    \field{number}{2-3}
+    \field{pages}{125 \bibrangedash  133}
+    \field{title}{Reducing energy time series for energy system models via
+  self-organizing maps}
+    \verb{url}
+    \verb https://www.degruyter.com/view/journals/itit/61/2-3/article-p125.xml
+    \endverb
+    \field{volume}{61}
+    \list{location}{1}{%
+      {Berlin, Boston}%
+    }
+    \field{journaltitle}{it - Information Technology}
+    \field{year}{01 Apr. 2019}
   \endentry
 \enddatalist
 \endinput

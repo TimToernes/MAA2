@@ -14,6 +14,7 @@ import pyomo.environ as pyomo_env
 from pyomo.core import ComponentUID
 import pickle
 import sys 
+import gurobipy
 
 #%%
 def import_network(Snapshots):
@@ -136,20 +137,17 @@ def rand_split(n):
     return rand_list
 
 
-
-#%%
-
       
 
 #%%
-
+__name__ = '__main__'
 if __name__ == '__main__':
     mode = 'sampling'
     try :
         print(sys.argv[1] )
         Snapshots = int(sys.argv[1] )
     except :
-        Snapshots = 7
+        Snapshots = 10
     try :
         n_rand_points = sys.argv[2]
     except :
@@ -173,17 +171,17 @@ if __name__ == '__main__':
                                                 (1 + MGA_slack) * old_objective_value)
 
         # Saving model as .lp file
-        _, smap_id = model.write("test.lp",)
+        _, smap_id = model.write("model_small.lp",)
         print('saved model .lp file')
         # Creating symbol map, such that variables can be maped back from .lp file to pyomo model
         symbol_map = model.solutions.symbol_map[smap_id]
         tmp_buffer = {} # this makes the process faster
         symbol_cuid_pairs = dict(
-                (symbol, ComponentUID(var_weakref(), cuid_buffer=tmp_buffer))
+                (symbol, ComponentUID(var_weakref()))
                 for symbol, var_weakref in symbol_map.bySymbol.items())
 
         # Pickeling variable pairs 
-        with open('var_pairs.pickle', 'wb') as handle:
+        with open('model_small_vars.pickle', 'wb') as handle:
             pickle.dump(symbol_cuid_pairs, handle, protocol=pickle.HIGHEST_PROTOCOL)  
         print('saved var_pairs as pickle')
 
