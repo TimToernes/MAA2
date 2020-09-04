@@ -1,6 +1,7 @@
 #%%
 import time
 import numpy as np
+import dask.array as da 
 
 
 def sample(A,b,x_0,n,time_max=1):
@@ -48,7 +49,8 @@ def sample(A,b,x_0,n,time_max=1):
             A_dot_x0 = A_dot_x_new
         else :
             print('discarding sample')
-    x_samples = np.array(x_samples)
+    #x_samples = np.array(x_samples)
+    x_samples = da.from_array(x_samples,chunks='auto')
     #print('elapsed time {}'.format(time.time()-timer_total))
     return x_samples
 

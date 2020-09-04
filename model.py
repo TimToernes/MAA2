@@ -141,13 +141,14 @@ def rand_split(n):
 
 #%%
 __name__ = '__main__'
+mode = 'sampling'
 if __name__ == '__main__':
     mode = 'sampling'
     try :
         print(sys.argv[1] )
         Snapshots = int(sys.argv[1] )
     except :
-        Snapshots = 10
+        Snapshots = 4
     try :
         n_rand_points = sys.argv[2]
     except :
@@ -211,5 +212,7 @@ if __name__ == '__main__':
         # Training metamodel
         print("Training metamodel")
         import metamodel
+
+# %%
 
 # %%
