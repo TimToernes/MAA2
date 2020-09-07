@@ -19,9 +19,47 @@ from gurobipy import GRB
 import dask.array as da
 import dask.dataframe as dd
 import sys
-
+import time
 
 # %% Function definitions 
+
+class timer:
+    def __init__(self):
+        self.init_time = time.time()
+        self.last_time = time.time()
+
+    def print(self,prt_str=None):
+        print('\n')
+        if prt_str != None :
+            print(prt_str)
+        print('Time elapsed {:.2f}s'.format(time.time()-self.init_time))
+        print('Step time {:.2f}s'.format(time.time()-self.last_time))
+        self.last_time = time.time()
+        
+
+class dataFrames:
+    # A class to store and save sample data 
+    def __init__(self,symbol_cuid_pairs,x_samples):
+        # Samples in simple array are asosiated with their variable names and saved in dask dataframe
+        symbol_cuid_pairs['ONE_VAR_CONSTANT'] = 'constant[constant]'
+        self.symbol_cuid_pairs = symbol_cuid_pairs
+        variables_symbolic_names = [var.getAttr('VarName') for var in m.getVars()]#[:-1]
+        variable_names = [str(symbol_cuid_pairs[v]) for v in variables_symbolic_names ]
+        df_names = [column.split('[')[0] for column in variable_names]
+        df_columns = [column.split('[')[1][:-1] for column in variable_names]
+        self.df_names_unique = np.unique(df_names)
+
+        for df_name in self.df_names_unique:
+                filt = [name == df_name for name in df_names]
+                columns = np.array(df_columns)[filt]
+                setattr(self,df_name,dd.from_dask_array(x_samples[:,filt],columns=columns))
+
+    def save(self):
+        for df_name in self.df_names_unique:
+            atrr = getattr(self,df_name)
+            atrr.to_csv('data/'+df_name+'_*')
+        print('data saved')
+
 
 def presolve(A,b,sense):
     # The presolve algorithm will find a fully dimensional sub problem to the original problem
@@ -31,7 +69,6 @@ def presolve(A,b,sense):
     A,b,N,x_0 = step3(A,b,H,c)
 
     return A,b,N,x_0
-
 
 
 def step1(A,b,sense):
@@ -197,98 +234,78 @@ def tjek_sample(x,A,sense,b):
     else :
         print('sample ok')
 
-# %% Load model from .lp file
-m = gp.read('model_small.lp')
-m.printStats()
-
-# Load variable mapping 
-with open('model_small_vars.pickle', 'rb') as handle:
-    symbol_cuid_pairs = pickle.load(handle)
-
-#%% Add variable bounds as constraints 
-
-for var in m.getVars():
-    if var.getAttr('ub') <np.inf :
-        m.addConstr(var,'<',var.getAttr('ub'))
-    if var.getAttr('lb')>-np.inf:
-        m.addConstr(var,'>',var.getAttr('lb'))
-    if var.getAttr('ub')-var.getAttr('lb') == 0:
-        print('zero range')
-
-# %% Retriving A matrix, b vector and constraint sense
+def find_feasible_solution(A_new,b_new):
+    # find a feasible solutions to a problem consiting only of inequalities 
+    # Problem should be on the form A*x=b
+    m_reduced = gp.Model("matrix1")
+    x = m_reduced.addMVar(shape=A_new.shape[1], name="x")
+    obj = np.zeros(A_new.shape[1])
+    m_reduced.setObjective(obj @ x, GRB.MAXIMIZE)
+    m_reduced.addConstr(A_new @ x <= b_new, name="c")
+    m_reduced.update()
+    m_reduced.optimize()
+    z_0 = x.X
+    return z_0
 
 
-A_spar = m.getA()
-#A = A_spar.toarray()
-b = m.getAttr('rhs')
-sense = [con.sense for con in m.getConstrs()]
-print('model has {} variables'.format(A_spar.shape[1]))
-
-# %% Presolve model
-
-A_new,b_new,N,x_0 = presolve(A_spar,b,sense)
-
-#%% Finding intial solution to z problem
-
-m_reduced = gp.Model("matrix1")
-
-x = m_reduced.addMVar(shape=A_new.shape[1], name="x")
-
-obj = np.zeros(A_new.shape[1])
-m_reduced.setObjective(obj @ x, GRB.MAXIMIZE)
-
-m_reduced.addConstr(A_new @ x <= b_new, name="c")
-m_reduced.update()
-m_reduced.optimize()
-z_0 = x.X
+def add_bound_constrs(m):
+    #%% Add variable bounds as constraints 
+    for var in m.getVars():
+        if var.getAttr('ub') <np.inf :
+            m.addConstr(var,'<',var.getAttr('ub'))
+        if var.getAttr('lb')>-np.inf:
+            m.addConstr(var,'>',var.getAttr('lb'))
+        if var.getAttr('ub')-var.getAttr('lb') == 0:
+            print('zero range')
+    return m 
 
 #%%
 
-try :
-    n_samples = int(sys.argv[1] )
-except :
-    n_samples = 1000
-print('Taking {} smaples'.format(n_samples))
+if __name__=='__main__':
+    t = timer()
+    # Tjek for external input
+    try :
+        n_samples = int(sys.argv[1] )
+    except :
+        n_samples = 1000
+    print('Taking {} smaples'.format(n_samples))   
+    # %% Load model from .lp file
+    m = gp.read('model_small.lp')
+    m.printStats()
+    # Load variable mapping 
+    with open('model_small_vars.pickle', 'rb') as handle:
+        symbol_cuid_pairs = pickle.load(handle)
 
-print('sampling started')
-n_samples = 1000
-z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples)
-print('done sampling')
-x_samples = decrush(z_samples,N,x_0)
+    t.print('Model loaded')
+    # %% Add variable bounds as constraints 
+    m = add_bound_constrs(m)
+    # %% Retriving A matrix, b vector and constraint sense
+    A_spar = m.getA()
+    b = m.getAttr('rhs')
+    sense = [con.sense for con in m.getConstrs()]
+    t.print('A matrix loaded')
+    print('model has {} variables'.format(A_spar.shape[1]))
 
+    # %% Presolve model
+    A_new,b_new,N,x_0 = presolve(A_spar,b,sense)
+    t.print('Presolve performed')
 
-#%%
+    #%% Finding intial solution to z problem
+    z_0 = find_feasible_solution(A_new,b_new)
+    t.print('Feasible solution to reduced problem found')
 
-class dataFrames:
-    def __init__(self,symbol_cuid_pairs,x_samples):
-        symbol_cuid_pairs['ONE_VAR_CONSTANT'] = 'constant[constant]'
-        self.symbol_cuid_pairs = symbol_cuid_pairs
-        variables_symbolic_names = [var.getAttr('VarName') for var in m.getVars()]#[:-1]
-        variable_names = [str(symbol_cuid_pairs[v]) for v in variables_symbolic_names ]
+    #%% Sample 
+    print('sampling started')
+    z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples)
+    t.print('Done sampling')
+    x_samples = decrush(z_samples,N,x_0)
+    t.print('Done decrushing')
 
-        df_names = [column.split('[')[0] for column in variable_names]
-        df_columns = [column.split('[')[1][:-1] for column in variable_names]
-
-        self.df_names_unique = np.unique(df_names)
-
-        for df_name in self.df_names_unique:
-                filt = [name == df_name for name in df_names]
-                columns = np.array(df_columns)[filt]
-                setattr(self,df_name,dd.from_dask_array(x_samples[:,filt],columns=columns))
-
-    def save(self):
-        for df_name in self.df_names_unique:
-            atrr = getattr(self,df_name)
-            atrr.to_csv('data/'+df_name+'_*')
-        print('data saved')
-
-# %% Creating dict of data frames to contain data 
-
-df = dataFrames(symbol_cuid_pairs,x_samples)
-
-#%% Save data
-
-df.save()
+    # %% Creating dict of data frames to contain data 
+    df = dataFrames(symbol_cuid_pairs,x_samples)
+    #%% Save data
+    df.save()
+    t.print('Data saved and script finished')
 
 #%%
 """

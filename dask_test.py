@@ -48,3 +48,39 @@ A_spar = m.getA()
 # %%
 sys.getsizeof(A)
 # %%
+#%% test for computing null space of sparse matrix 
+
+A = np.random.rand(500,700)
+A[A<0.99] = 0 
+
+
+A_spar = scipy.sparse.csr_matrix(A)
+
+#%%
+print('rank of A {}'.format(np.linalg.matrix_rank(A)))
+print('null matrix shape {}x{}'.format(A.shape[1],A.shape[1]-np.linalg.matrix_rank(A)))
+
+#%%
+N1 = scipy.linalg.null_space(A)
+# %%
+# of the singular values/vectors is probably not feasible for large sparse matrices
+u, s, vh = np.linalg.svd(A, full_matrices=False)
+#tol = np.finfo(A.dtype).eps * A.nnz
+k = A.shape[1]-np.linalg.matrix_rank(A)
+s_copy = s.copy()
+s_copy.sort()
+tol = s_copy[k-1]
+
+N2 = vh.compress(s <= tol, axis=0).conj().T
+# %%
+
+
+k = A.shape[1]-np.linalg.matrix_rank(A)
+u,s,vt = scipy.sparse.linalg.svds(A_spar,k=min(A.shape)-1,which='SM',tol=1e-9)
+N3 = vt.T
+# %%
+
+print(np.max(np.dot(A,N1)))
+print(np.max(np.dot(A,N2)))
+print(np.max(np.dot(A,N3)))
+# %%
