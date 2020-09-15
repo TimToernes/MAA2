@@ -14,7 +14,6 @@ import pyomo.environ as pyomo_env
 from pyomo.core import ComponentUID
 import pickle
 import sys 
-import gurobipy
 import logging
 logging.getLogger().setLevel(logging.WARNING)
 logger = logging.getLogger('Model creator')
