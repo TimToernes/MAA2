@@ -2,7 +2,7 @@
 import os 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
-import pypsa
+#import pypsa
 from pyomo.core import ComponentUID
 import gurobipy as gp
 import scipy 
@@ -13,13 +13,19 @@ from sample import sample as rand_walk_sample
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
-import pyomo.environ as pyomo_env
+#import pyomo.environ as pyomo_env
 import pickle 
 from gurobipy import GRB
 import dask.array as da
 import dask.dataframe as dd
 import sys
 import time
+import logging 
+logging.getLogger().setLevel(logging.WARNING)
+logger = logging.getLogger('MAA')
+logger.setLevel(logging.INFO)
+
+
 
 # %% Function definitions 
 
@@ -29,11 +35,14 @@ class timer:
         self.last_time = time.time()
 
     def print(self,prt_str=None):
-        print('\n')
+        logger.info('  ')
         if prt_str != None :
-            print(prt_str)
-        print('Time elapsed {:.2f}s'.format(time.time()-self.init_time))
-        print('Step time {:.2f}s'.format(time.time()-self.last_time))
+            #print(prt_str)
+            logger.info(prt_str)
+
+        logger.info('Time elapsed {:.2f}s'.format(time.time()-self.init_time))
+        logger.info('Step time {:.2f}s'.format(time.time()-self.last_time))
+        logger.info('  ')
         self.last_time = time.time()
         
 
@@ -58,12 +67,13 @@ class dataFrames:
         for df_name in self.df_names_unique:
             atrr = getattr(self,df_name)
             atrr.to_csv('data/'+df_name+'_*')
-        print('data saved')
+        loggger.info('data saved')
 
 
 def presolve(A,b,sense):
     # The presolve algorithm will find a fully dimensional sub problem to the original problem
     # given in A. 
+    logger.info('Presolve started')
     A,b,H,c = step1(A,b,sense)
     A,b,H,c = step2(A,b,H,c)
     A,b,N,x_0 = step3(A,b,H,c)
@@ -105,7 +115,7 @@ def step1(A,b,sense):
 
     delete_rows_csr(A,rows_to_delete[::-1])
     b_1 = np.array(b_1) 
-    print('step 1 done ')
+    logger.info('step 1 done ')
     return A,b_1,H_1,c_1
 
 def step2_2(A,b,H,c,ub_idx,ub_idb,lb_idx,lb_idb):
@@ -141,7 +151,7 @@ def step2_2(A,b,H,c,ub_idx,ub_idb,lb_idx,lb_idb):
     b = np.delete(b,rows_to_delete)
     #H = np.array(H)
     c = np.array(c)
-    print('step 2 done ')
+    logger.info('step 2 done ')
     return A,b,H,c
 
 def step2_1(A):
@@ -167,7 +177,7 @@ def step2_1(A):
     ub_idb = np.array(ub_idb)
     lb_idx = np.array(lb_idx)
     lb_idb = np.array(lb_idb)
-    print('step 2.1 done')
+    logger.info('step 2.1 done')
     return ub_idx,ub_idb,lb_idx,lb_idb
 
 def step2(A,b,H,c):
@@ -186,13 +196,13 @@ def step3(A,b,H,c):
 
         A_new = A.dot(N)
         b_new = b - A.dot(x_0)
-        print('reduced model has {} variables'.format(A_new.shape[1]))
+        logger.info('reduced model has {} variables'.format(A_new.shape[1]))
     else :
         A_new = A
         b_new = b
         N = None 
         x_0 = None
-    print('step 3 done ')
+    logger.info('step 3 done ')
     return A_new,b_new,N,x_0
 
 def delete_rows_csr(mat, i_list):
@@ -235,6 +245,7 @@ def tjek_sample(x,A,sense,b):
         print('sample ok')
 
 def find_feasible_solution(A_new,b_new):
+    logger.info('Finding feasible solution')
     # find a feasible solutions to a problem consiting only of inequalities 
     # Problem should be on the form A*x=b
     m_reduced = gp.Model("matrix1")
@@ -262,16 +273,17 @@ def add_bound_constrs(m):
 #%%
 
 if __name__=='__main__':
+
     t = timer()
     # Tjek for external input
     try :
         n_samples = int(sys.argv[1] )
     except :
-        n_samples = 1000
-    print('Taking {} smaples'.format(n_samples))   
+        n_samples = 10
+    logger.info('Taking {} smaples'.format(n_samples))   
     # %% Load model from .lp file
     m = gp.read('model_small.lp')
-    m.printStats()
+    #m.printStats()
     # Load variable mapping 
     with open('model_small_vars.pickle', 'rb') as handle:
         symbol_cuid_pairs = pickle.load(handle)
@@ -284,7 +296,7 @@ if __name__=='__main__':
     b = m.getAttr('rhs')
     sense = [con.sense for con in m.getConstrs()]
     t.print('A matrix loaded')
-    print('model has {} variables'.format(A_spar.shape[1]))
+    logger.info('model has {} variables'.format(A_spar.shape[1]))
 
     # %% Presolve model
     A_new,b_new,N,x_0 = presolve(A_spar,b,sense)
@@ -295,7 +307,7 @@ if __name__=='__main__':
     t.print('Feasible solution to reduced problem found')
 
     #%% Sample 
-    print('sampling started')
+    logger.info('Sampling started')
     z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples)
     t.print('Done sampling')
     x_samples = decrush(z_samples,N,x_0)
@@ -306,6 +318,17 @@ if __name__=='__main__':
     #%% Save data
     df.save()
     t.print('Data saved and script finished')
+
+#%%
+
+
+logger1 = logging.getLogger('test')
+logger1.setLevel(logging.INFO)
+
+logger1.info('test')
+
+logging.info('test2')
+
 
 #%%
 """
