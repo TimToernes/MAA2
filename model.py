@@ -15,6 +15,10 @@ from pyomo.core import ComponentUID
 import pickle
 import sys 
 import gurobipy
+import logging
+logging.getLogger().setLevel(logging.WARNING)
+logger = logging.getLogger('Model creator')
+logger.setLevel(logging.INFO)
 
 #%%
 def import_network(Snapshots):
@@ -145,7 +149,7 @@ mode = 'sampling'
 if __name__ == '__main__':
     mode = 'sampling'
     try :
-        print(sys.argv[1] )
+        logger.info(sys.argv[1] )
         Snapshots = int(sys.argv[1] )
     except :
         Snapshots = 4
@@ -153,8 +157,8 @@ if __name__ == '__main__':
         n_rand_points = sys.argv[2]
     except :
         n_rand_points = 30
-    print('Using {} snapshots'.format(Snapshots))
-    print("{} random samples, {} snapshots".format(n_rand_points,Snapshots))
+    logger.info('Using {} snapshots'.format(Snapshots))
+    logger.info("{} random samples, {} snapshots".format(n_rand_points,Snapshots))
 
     network = import_network(Snapshots)
 
@@ -173,7 +177,7 @@ if __name__ == '__main__':
 
         # Saving model as .lp file
         _, smap_id = model.write("model_small.lp",)
-        print('saved model .lp file')
+        logger.info('saved model .lp file')
         # Creating symbol map, such that variables can be maped back from .lp file to pyomo model
         symbol_map = model.solutions.symbol_map[smap_id]
         tmp_buffer = {} # this makes the process faster
@@ -184,7 +188,7 @@ if __name__ == '__main__':
         # Pickeling variable pairs 
         with open('model_small_vars.pickle', 'wb') as handle:
             pickle.dump(symbol_cuid_pairs, handle, protocol=pickle.HIGHEST_PROTOCOL)  
-        print('saved var_pairs as pickle')
+        logger.info('saved var_pairs as pickle')
 
     elif mode == 'metamodel':
         network = initialize_network(network)
@@ -199,7 +203,7 @@ if __name__ == '__main__':
         X = pd.DataFrame(data = directions)
         X = X.sample(frac=1).reset_index(drop=True)
         X.to_csv('X')
-        print('Saved X')
+        logger.info('Saved X')
         # Creating Y
 
         Y = pd.DataFrame(columns=range(111))
@@ -207,10 +211,10 @@ if __name__ == '__main__':
             Y.loc[len(Y)] = evaluate(x[1].values)
 
         Y.to_csv('Y')
-        print('Saved Y')
+        logger.info('Saved Y')
 
         # Training metamodel
-        print("Training metamodel")
+        logger.info("Training metamodel")
         import metamodel
 
 # %%
