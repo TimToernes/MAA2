@@ -1,0 +1,256 @@
+INFO:__main__:Taking 10 smaples
+INFO:gurobipy:Using license file /opt/gurobi901/gurobi.lic
+INFO:gurobipy:Academic license - for non-commercial use only
+INFO:gurobipy:Read LP format model from file model_small.lp
+INFO:gurobipy:Reading time = 0.01 seconds
+INFO:gurobipy:x936: 1547 rows, 936 columns, 3748 nonzeros
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.09s
+INFO:__main__:Step time 0.09s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.11s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 1.40s
+INFO:__main__:Step time 1.29s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:gurobipy:Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+INFO:gurobipy:Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+INFO:gurobipy:Optimize a model with 1303 rows, 571 columns and 357228 nonzeros
+INFO:gurobipy:Model fingerprint: 0xd82c1de1
+INFO:gurobipy:Coefficient statistics:
+INFO:gurobipy:  Matrix range     [1e-07, 2e+05]
+INFO:gurobipy:  Objective range  [0e+00, 0e+00]
+INFO:gurobipy:  Bounds range     [0e+00, 0e+00]
+INFO:gurobipy:  RHS range        [8e-01, 3e+07]
+INFO:gurobipy:Warning: Model contains large matrix coefficient range
+INFO:gurobipy:         Consider reformulating model or setting NumericFocus parameter
+INFO:gurobipy:         to avoid numerical issues.
+INFO:gurobipy:
+INFO:gurobipy:Concurrent LP optimizer: dual simplex and barrier
+INFO:gurobipy:Showing barrier log only...
+INFO:gurobipy:
+INFO:gurobipy:Presolve removed 33 rows and 381 columns
+INFO:gurobipy:Presolve time: 0.19s
+INFO:gurobipy:Presolved: 538 rows, 922 columns, 357000 nonzeros
+INFO:gurobipy:
+INFO:gurobipy:
+INFO:gurobipy:Barrier performed 0 iterations in 0.23 seconds
+INFO:gurobipy:Barrier solve interrupted - model solved by another algorithm
+INFO:gurobipy:
+INFO:gurobipy:
+INFO:gurobipy:Solved with dual simplex
+INFO:gurobipy:Solved in 0 iterations and 0.23 seconds
+INFO:gurobipy:Optimal objective -0.000000000e+00
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 1.66s
+INFO:__main__:Step time 0.26s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 1.69s
+INFO:__main__:Step time 0.03s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 1.75s
+INFO:__main__:Step time 0.06s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 1.87s
+INFO:__main__:Step time 0.12s
+INFO:__main__:  
+INFO:test:test
+INFO:root:test2
+INFO:__main__:Taking 10 smaples
+INFO:gurobipy:Using license file /opt/gurobi901/gurobi.lic
+INFO:gurobipy:Academic license - for non-commercial use only
+INFO:gurobipy:Read LP format model from file model_small.lp
+INFO:gurobipy:Reading time = 0.01 seconds
+INFO:gurobipy:x936: 1547 rows, 936 columns, 3748 nonzeros
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.10s
+INFO:__main__:Step time 0.10s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.11s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 1.32s
+INFO:__main__:Step time 1.20s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:gurobipy:Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+INFO:gurobipy:Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+INFO:gurobipy:Optimize a model with 1303 rows, 571 columns and 357228 nonzeros
+INFO:gurobipy:Model fingerprint: 0xd82c1de1
+INFO:gurobipy:Coefficient statistics:
+INFO:gurobipy:  Matrix range     [1e-07, 2e+05]
+INFO:gurobipy:  Objective range  [0e+00, 0e+00]
+INFO:gurobipy:  Bounds range     [0e+00, 0e+00]
+INFO:gurobipy:  RHS range        [8e-01, 3e+07]
+INFO:gurobipy:Warning: Model contains large matrix coefficient range
+INFO:gurobipy:         Consider reformulating model or setting NumericFocus parameter
+INFO:gurobipy:         to avoid numerical issues.
+INFO:gurobipy:
+INFO:gurobipy:Concurrent LP optimizer: dual simplex and barrier
+INFO:gurobipy:Showing barrier log only...
+INFO:gurobipy:
+INFO:gurobipy:Presolve removed 33 rows and 381 columns
+INFO:gurobipy:Presolve time: 0.16s
+INFO:gurobipy:Presolved: 538 rows, 922 columns, 357000 nonzeros
+INFO:gurobipy:
+INFO:gurobipy:
+INFO:gurobipy:Barrier performed 0 iterations in 0.21 seconds
+INFO:gurobipy:Barrier solve interrupted - model solved by another algorithm
+INFO:gurobipy:
+INFO:gurobipy:
+INFO:gurobipy:Solved with dual simplex
+INFO:gurobipy:Solved in 0 iterations and 0.21 seconds
+INFO:gurobipy:Optimal objective -0.000000000e+00
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 1.57s
+INFO:__main__:Step time 0.25s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 1.59s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 1.62s
+INFO:__main__:Step time 0.03s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 1.71s
+INFO:__main__:Step time 0.09s
+INFO:__main__:  
+INFO:test:test
+INFO:root:test2
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.09s
+INFO:__main__:Step time 0.09s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.12s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 1.40s
+INFO:__main__:Step time 1.29s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 1.67s
+INFO:__main__:Step time 0.27s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 1.69s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 1.73s
+INFO:__main__:Step time 0.03s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 1.84s
+INFO:__main__:Step time 0.11s
+INFO:__main__:  
+INFO:test:test
+INFO:root:test2
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.09s
+INFO:__main__:Step time 0.09s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.11s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 1.41s
+INFO:__main__:Step time 1.30s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 1.65s
+INFO:__main__:Step time 0.25s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 1.68s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 1.72s
+INFO:__main__:Step time 0.04s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 1.84s
+INFO:__main__:Step time 0.12s
+INFO:__main__:  

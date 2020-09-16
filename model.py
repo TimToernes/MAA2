@@ -15,11 +15,28 @@ from pyomo.core import ComponentUID
 import pickle
 import sys 
 import logging
-logging.getLogger().setLevel(logging.WARNING)
-logger = logging.getLogger('Model creator')
-logger.setLevel(logging.INFO)
 
 #%%
+def setup_logging():
+    #logger = logging.getLogger('MAA')
+    logging.basicConfig(level=logging.INFO, filename='log.log')
+    logger = logging.getLogger(__name__)
+
+    # create console handler and set level to debug
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+    # create formatter
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    # add formatter to ch
+    ch.setFormatter(formatter)
+
+    # add ch to logger
+    logger.addHandler(ch)
+    return logger
+
+
+
 def import_network(Snapshots):
     network = pypsa.Network()
     network.import_from_hdf5('euro_95')
@@ -146,6 +163,8 @@ def rand_split(n):
 __name__ = '__main__'
 mode = 'sampling'
 if __name__ == '__main__':
+    logger = setup_logging()
+    
     mode = 'sampling'
     try :
         logger.info(sys.argv[1] )

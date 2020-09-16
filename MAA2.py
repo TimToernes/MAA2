@@ -21,10 +21,6 @@ import dask.dataframe as dd
 import sys
 import time
 import logging 
-logging.getLogger().setLevel(logging.WARNING)
-logger = logging.getLogger('MAA')
-logger.setLevel(logging.INFO)
-
 
 
 # %% Function definitions 
@@ -67,7 +63,7 @@ class dataFrames:
         for df_name in self.df_names_unique:
             atrr = getattr(self,df_name)
             atrr.to_csv('data/'+df_name+'_*')
-        loggger.info('data saved')
+        logger.info('data saved')
 
 
 def presolve(A,b,sense):
@@ -270,10 +266,29 @@ def add_bound_constrs(m):
             print('zero range')
     return m 
 
+def setup_logging():
+    logging.getLogger('gurobipy').setLevel(logging.WARNING)
+    #logger = logging.getLogger('MAA')
+    logging.basicConfig(level=logging.INFO, filename='log.log')
+    logger = logging.getLogger(__name__)
+
+    # create console handler and set level to debug
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+    # create formatter
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    # add formatter to ch
+    ch.setFormatter(formatter)
+
+    # add ch to logger
+    logger.addHandler(ch)
+    return logger
+
 #%%
 
 if __name__=='__main__':
-
+    logger = setup_logging()
     t = timer()
     # Tjek for external input
     try :
@@ -318,16 +333,6 @@ if __name__=='__main__':
     #%% Save data
     df.save()
     t.print('Data saved and script finished')
-
-#%%
-
-
-logger1 = logging.getLogger('test')
-logger1.setLevel(logging.INFO)
-
-logger1.info('test')
-
-logging.info('test2')
 
 
 #%%
