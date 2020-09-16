@@ -164,13 +164,13 @@ __name__ = '__main__'
 mode = 'sampling'
 if __name__ == '__main__':
     logger = setup_logging()
-    
+
     mode = 'sampling'
     try :
         logger.info(sys.argv[1] )
         Snapshots = int(sys.argv[1] )
     except :
-        Snapshots = 4
+        Snapshots = 50
     try :
         n_rand_points = sys.argv[2]
     except :

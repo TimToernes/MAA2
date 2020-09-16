@@ -4,6 +4,8 @@ from dask.distributed import Client, progress
 import sparse
 import numpy as np
 import scipy 
+import scipy.linalg
+import scipy.sparse.linalg
 import gurobipy as gp
 import sys
 #%%
@@ -60,9 +62,10 @@ A_spar = scipy.sparse.csr_matrix(A)
 print('rank of A {}'.format(np.linalg.matrix_rank(A)))
 print('null matrix shape {}x{}'.format(A.shape[1],A.shape[1]-np.linalg.matrix_rank(A)))
 
-#%%
+#%% Method 1
 N1 = scipy.linalg.null_space(A)
-# %%
+
+# %% Method 2
 # of the singular values/vectors is probably not feasible for large sparse matrices
 u, s, vh = np.linalg.svd(A, full_matrices=False)
 #tol = np.finfo(A.dtype).eps * A.nnz
@@ -72,11 +75,13 @@ s_copy.sort()
 tol = s_copy[k-1]
 
 N2 = vh.compress(s <= tol, axis=0).conj().T
-# %%
-
+# %% Method 3
 
 k = A.shape[1]-np.linalg.matrix_rank(A)
-u,s,vt = scipy.sparse.linalg.svds(A_spar,k=min(A.shape)-1,which='SM',tol=1e-9)
+u,s,vt = scipy.sparse.linalg.svds(A_spar,
+                                  k=min(A.shape)-1,
+                                  which='SM',
+                                  tol=1e-9)
 N3 = vt.T
 # %%
 

@@ -2,7 +2,7 @@
 import time
 import numpy as np
 import dask.array as da 
-
+import logging
 
 def sample(A,b,x_0,n,time_max=1):
     timer = time.time()
@@ -31,7 +31,7 @@ def sample(A,b,x_0,n,time_max=1):
         if t_len < 1e-12:
             #print('t less than 1e-12, t = {}'.format(t_len))
             if time.time()-timer>time_max:
-                print('did not manage to find viable sample within specified time')
+                logging.warning('did not manage to find viable sample within specified time')
                 break 
             else :
                 continue 

@@ -21,6 +21,7 @@ import dask.dataframe as dd
 import sys
 import time
 import logging 
+import sparseqr
 
 
 # %% Function definitions 
@@ -185,10 +186,12 @@ def step3(A,b,H,c):
     # Step 3
     # Compute null space of H and remove all equalities 
     if H.shape[0]>0:
-        N = scipy.sparse.csr_matrix(scipy.linalg.null_space(H.toarray()))
+        #N = scipy.sparse.csr_matrix(scipy.linalg.null_space(H.toarray()))
+        N = calc_null_space(H,tjek=True)
         # find x0 
-        res = scipy.optimize.linprog(c=np.zeros(A.shape[1]),A_ub=A,b_ub=b,A_eq=H,b_eq=c)
-        x_0 = res.x
+        #res = scipy.optimize.linprog(c=np.zeros(A.shape[1]),A_ub=A,b_ub=b,A_eq=H,b_eq=c)
+        #x_0 = res.x
+        x_0 = find_feasible_solution(A,b,H,c)
 
         A_new = A.dot(N)
         b_new = b - A.dot(x_0)
@@ -200,6 +203,17 @@ def step3(A,b,H,c):
         x_0 = None
     logger.info('step 3 done ')
     return A_new,b_new,N,x_0
+
+def calc_null_space(A_spar,tjek=False):
+    Q, _, _,r = sparseqr.qr( A_spar.transpose() )
+    del _ 
+    N = Q.tocsr()[:,r:]
+    if tjek :
+        if A_spar.dot(N).max()>1e-3:
+            logger.warning('Nullspace tollerence violated')
+        else :
+            logger.info('Nullspace is good')
+    return N
 
 def delete_rows_csr(mat, i_list):
     # Function for deleting row from matrix on compressed sparse row format
@@ -240,16 +254,20 @@ def tjek_sample(x,A,sense,b):
     else :
         print('sample ok')
 
-def find_feasible_solution(A_new,b_new):
+def find_feasible_solution(A,b,H=None,c=None):
     logger.info('Finding feasible solution')
     # find a feasible solutions to a problem consiting only of inequalities 
     # Problem should be on the form A*x=b
     m_reduced = gp.Model("matrix1")
-    x = m_reduced.addMVar(shape=A_new.shape[1], name="x")
-    obj = np.zeros(A_new.shape[1])
+    x = m_reduced.addMVar(shape=A.shape[1], name="x")
+    obj = np.zeros(A.shape[1])
     m_reduced.setObjective(obj @ x, GRB.MAXIMIZE)
-    m_reduced.addConstr(A_new @ x <= b_new, name="c")
+    m_reduced.addMConstrs(A, x , GRB.LESS_EQUAL, b, name="c_ineq")
+    if H != None:
+        m_reduced.addMConstrs(H, x , GRB.EQUAL ,c, name="c_eq")
     m_reduced.update()
+    m_reduced.setParam('NumericFocus',3)
+    m_reduced.setParam('ScaleFlag',0)
     m_reduced.optimize()
     z_0 = x.X
     return z_0
@@ -323,7 +341,7 @@ if __name__=='__main__':
 
     #%% Sample 
     logger.info('Sampling started')
-    z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples)
+    z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples,time_max=10)
     t.print('Done sampling')
     x_samples = decrush(z_samples,N,x_0)
     t.print('Done decrushing')

@@ -254,3 +254,596 @@ INFO:__main__:Data saved and script finished
 INFO:__main__:Time elapsed 1.84s
 INFO:__main__:Step time 0.12s
 INFO:__main__:  
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.09s
+INFO:__main__:Step time 0.10s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.16s
+INFO:__main__:Step time 0.06s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 2.16s
+INFO:__main__:Step time 2.00s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 2.31s
+INFO:__main__:Step time 0.14s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 2.33s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 2.38s
+INFO:__main__:Step time 0.05s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 2.51s
+INFO:__main__:Step time 0.13s
+INFO:__main__:  
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.05s
+INFO:__main__:Step time 0.05s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.10s
+INFO:__main__:Step time 0.05s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 2.20s
+INFO:__main__:Step time 2.09s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 2.61s
+INFO:__main__:Step time 0.40s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 2.66s
+INFO:__main__:Step time 0.04s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 2.73s
+INFO:__main__:Step time 0.05s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 2.92s
+INFO:__main__:Step time 0.19s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 124.70s
+INFO:__main__:Step time 121.78s
+INFO:__main__:  
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 163.41s
+INFO:__main__:Step time 38.70s
+INFO:__main__:  
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.05s
+INFO:__main__:Step time 0.06s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.11s
+INFO:__main__:Step time 0.05s
+INFO:__main__:  
+INFO:__main__:model has 936 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:reduced model has 571 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 1.98s
+INFO:__main__:Step time 1.85s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 2.12s
+INFO:__main__:Step time 0.13s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 2.15s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 2.20s
+INFO:__main__:Step time 0.04s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 2.39s
+INFO:__main__:Step time 0.19s
+INFO:__main__:  
+INFO:__main__:-f
+INFO:__main__:Using 30 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-6b0593f8-6b0d-4804-9d1c-fd74e408d8d9.json random samples, 30 snapshots
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.15s
+INFO:__main__:Step time 0.16s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.30s
+INFO:__main__:Step time 0.14s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:reduced model has 3497 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 67.07s
+INFO:__main__:Step time 66.75s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 67.68s
+INFO:__main__:Step time 0.61s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 67.77s
+INFO:__main__:Step time 0.08s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 67.85s
+INFO:__main__:Step time 0.06s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 68.50s
+INFO:__main__:Step time 0.63s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 190.93s
+INFO:__main__:Step time 122.42s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 191.14s
+INFO:__main__:Step time 0.21s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.13s
+INFO:__main__:Step time 0.14s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.30s
+INFO:__main__:Step time 0.14s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:Finding feasible solution
+INFO:__main__:reduced model has 3497 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 8.74s
+INFO:__main__:Step time 8.42s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 9.42s
+INFO:__main__:Step time 0.67s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 10.49s
+INFO:__main__:Step time 1.04s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 10.55s
+INFO:__main__:Step time 0.04s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 11.08s
+INFO:__main__:Step time 0.51s
+INFO:__main__:  
+ERROR:root:Invalid alias: The name clear can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name more can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name less can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name man can't be aliased because it is another magic command.
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.23s
+INFO:__main__:Step time 0.24s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.37s
+INFO:__main__:Step time 0.13s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+ERROR:root:Invalid alias: The name clear can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name more can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name less can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name man can't be aliased because it is another magic command.
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.29s
+INFO:__main__:Step time 0.29s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.45s
+INFO:__main__:Step time 0.16s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:Finding feasible solution
+INFO:__main__:reduced model has 3497 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 7.31s
+INFO:__main__:Step time 6.85s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 8.07s
+INFO:__main__:Step time 0.76s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 9.08s
+INFO:__main__:Step time 1.01s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 9.10s
+INFO:__main__:Step time 0.01s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 9.48s
+INFO:__main__:Step time 0.38s
+INFO:__main__:  
+ERROR:root:Invalid alias: The name clear can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name more can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name less can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name man can't be aliased because it is another magic command.
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.22s
+INFO:__main__:Step time 0.22s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.37s
+INFO:__main__:Step time 0.15s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:Finding feasible solution
+INFO:__main__:reduced model has 3497 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 7.23s
+INFO:__main__:Step time 6.85s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 8.00s
+INFO:__main__:Step time 0.76s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 18.01s
+INFO:__main__:Step time 10.01s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 18.04s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 18.40s
+INFO:__main__:Step time 0.36s
+INFO:__main__:  
+ERROR:root:Invalid alias: The name clear can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name more can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name less can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name man can't be aliased because it is another magic command.
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.27s
+INFO:__main__:Step time 0.28s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.45s
+INFO:__main__:Step time 0.17s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:reduced model has 3497 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 63.48s
+INFO:__main__:Step time 63.02s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 64.21s
+INFO:__main__:Step time 0.72s
+INFO:__main__:  
+INFO:__main__:Sampling started
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 64.27s
+INFO:__main__:Step time 0.06s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 64.35s
+INFO:__main__:Step time 0.08s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 64.80s
+INFO:__main__:Step time 0.45s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 648.71s
+INFO:__main__:Step time 583.90s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 648.83s
+INFO:__main__:Step time 0.12s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Finding feasible solution
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.39s
+INFO:__main__:Step time 0.40s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.64s
+INFO:__main__:Step time 0.24s
+INFO:__main__:  
+INFO:__main__:model has 5954 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:Finding feasible solution
+INFO:__main__:reduced model has 3497 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 8.02s
+INFO:__main__:Step time 7.37s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 8.70s
+INFO:__main__:Step time 0.67s
+INFO:__main__:  
+INFO:__main__:Sampling started
+WARNING:root:did not manage to find viable sample within specified time
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 18.73s
+INFO:__main__:Step time 10.01s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 18.75s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 19.19s
+INFO:__main__:Step time 0.43s
+INFO:__main__:  
+ERROR:root:Invalid alias: The name clear can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name more can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name less can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name man can't be aliased because it is another magic command.
+INFO:__main__:-f
+INFO:__main__:Using 50 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-f62df950-2203-4b2b-9251-9b58ff78d7f1.json random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+ERROR:root:Invalid alias: The name clear can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name more can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name less can't be aliased because it is another magic command.
+ERROR:root:Invalid alias: The name man can't be aliased because it is another magic command.
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.25s
+INFO:__main__:Step time 0.26s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 0.52s
+INFO:__main__:Step time 0.26s
+INFO:__main__:  
+INFO:__main__:model has 9814 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:Nullspace is good
+INFO:__main__:Finding feasible solution
+INFO:__main__:reduced model has 5798 variables
+INFO:__main__:step 3 done 
+INFO:__main__:  
+INFO:__main__:Presolve performed
+INFO:__main__:Time elapsed 12.66s
+INFO:__main__:Step time 12.14s
+INFO:__main__:  
+INFO:__main__:Finding feasible solution
+INFO:__main__:  
+INFO:__main__:Feasible solution to reduced problem found
+INFO:__main__:Time elapsed 13.75s
+INFO:__main__:Step time 1.09s
+INFO:__main__:  
+INFO:__main__:Sampling started
+WARNING:root:did not manage to find viable sample within specified time
+INFO:__main__:  
+INFO:__main__:Done sampling
+INFO:__main__:Time elapsed 23.76s
+INFO:__main__:Step time 10.01s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:Done decrushing
+INFO:__main__:Time elapsed 23.78s
+INFO:__main__:Step time 0.02s
+INFO:__main__:  
+INFO:__main__:data saved
+INFO:__main__:  
+INFO:__main__:Data saved and script finished
+INFO:__main__:Time elapsed 24.36s
+INFO:__main__:Step time 0.57s
+INFO:__main__:  
