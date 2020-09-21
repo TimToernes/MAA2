@@ -187,7 +187,7 @@ def step3(A,b,H,c):
     # Compute null space of H and remove all equalities 
     if H.shape[0]>0:
         #N = scipy.sparse.csr_matrix(scipy.linalg.null_space(H.toarray()))
-        N = calc_null_space(H,tjek=True)
+        N = calc_null_space3(H,tjek=True)
         # find x0 
         #res = scipy.optimize.linprog(c=np.zeros(A.shape[1]),A_ub=A,b_ub=b,A_eq=H,b_eq=c)
         #x_0 = res.x
@@ -208,6 +208,17 @@ def calc_null_space(A_spar,tjek=False):
     Q, _, _,r = sparseqr.qr( A_spar.transpose() )
     del _ 
     N = Q.tocsr()[:,r:]
+    if tjek :
+        if A_spar.dot(N).max()>1e-3:
+            logger.warning('Nullspace tollerence violated')
+        else :
+            logger.info('Nullspace is good')
+    return N
+
+def calc_null_space3(A_spar,tjek=False):
+    eps = 1e-12
+    u, s, vh = scipy.sparse.linalg.svds(A_spar,k=min(A.shape)-1,which='SM',tol=eps)
+    N= scipy.sparse.csr_matrix(scipy.compress(s<=eps,vh,axis=0).T)
     if tjek :
         if A_spar.dot(N).max()>1e-3:
             logger.warning('Nullspace tollerence violated')

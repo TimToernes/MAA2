@@ -15,6 +15,9 @@ from pyomo.core import ComponentUID
 import pickle
 import sys 
 import logging
+from multiprocessing import Lock, Process, Queue, current_process
+import queue
+import time 
 
 #%%
 def setup_logging():
@@ -146,7 +149,6 @@ def evaluate(network,x):
 
     return y
 
-#%%
 def rand_split(n):
     
     rand_list = np.random.random(n-1)
@@ -156,6 +158,67 @@ def rand_split(n):
 
     return rand_list
 
+
+def get_symbol_cuid_pairs(symbol_map,n_jobs=4):
+
+    # Generate dict with var number and reference
+    symbol_refs = dict((symbol, var_weakref())
+                    for symbol, var_weakref in symbol_map.bySymbol.items())
+
+    # Split this dict in to n_jobs chuncks
+    symbol_refs_lists = []
+    idx = np.linspace(0,len(symbol_refs),n_jobs+1)
+    for i in range(n_jobs):
+        i_start = int(idx[i])
+        i_end = int(idx[i+1])
+        symbol_refs_lists.append(dict(list(symbol_refs.items())[i_start:i_end]))
+
+    # Define job function to get variable names 
+    def job(ref_lst,q_done):
+        d = dict()
+        for symbol, var_weakref in ref_lst.items():
+            d[symbol]=ComponentUID(var_weakref) 
+        q_done.put(d,block=True)
+        return
+
+    # Start a queue for done jobs 
+    q_done = Queue()
+    # Start n_proceses 
+    processes = []
+    for ref_lst in symbol_refs_lists:
+        p = Process(target=job, args=(ref_lst,q_done))
+        processes.append(p)
+        p.start()
+        logger.info('{} started'.format(p.name))
+    
+    # Wait for proceses to finish 
+    logger.info('Waiting for jobs to finish')
+    while q_done.qsize() < n_jobs:
+        time.sleep(1)
+
+    # Join all sub proceses
+    for p in processes:
+        logger.info('waiting to join {}'.format(p.name))
+        try :
+            p.join(1)
+        except :
+            p.terminate()
+            p.join(60)
+            logger.info('killed {}'.format(p.name))
+        else :
+            logger.info('joined {}'.format(p.name))
+
+    # Create symbol cuid pairs dict from part results 
+    symbol_cuid_pairs = dict()
+    while not q_done.empty():
+        symbol_cuid_pairs.update(q_done.get())
+
+    if len(symbol_cuid_pairs) == len(symbol_refs):
+        logger.info('symbol cuid pars == symbol refs')
+    else :
+        logger.warning('symbol cuid pars != symbol refs')
+
+    return symbol_cuid_pairs
 
       
 
@@ -188,7 +251,7 @@ if __name__ == '__main__':
         network.lopf(formulation='angles',solver_name='gurobi',)
         old_objective_value = network.objective
         model = network.model
-        MGA_slack = 0.5
+        MGA_slack = 0.1
         # Add the MGA slack constraint.
         model.mga_constraint = pyomo_env.Constraint(expr=model.objective.expr <= 
                                                 (1 + MGA_slack) * old_objective_value)
@@ -198,16 +261,15 @@ if __name__ == '__main__':
         logger.info('saved model .lp file')
         # Creating symbol map, such that variables can be maped back from .lp file to pyomo model
         symbol_map = model.solutions.symbol_map[smap_id]
-        tmp_buffer = {} # this makes the process faster
-        symbol_cuid_pairs = dict(
-                (symbol, ComponentUID(var_weakref()))
-                for symbol, var_weakref in symbol_map.bySymbol.items())
+        symbol_cuid_pairs = get_symbol_cuid_pairs(symbol_map,n_jobs=os.cpu_count())
 
         # Pickeling variable pairs 
         with open('model_small_vars.pickle', 'wb') as handle:
             pickle.dump(symbol_cuid_pairs, handle, protocol=pickle.HIGHEST_PROTOCOL)  
         logger.info('saved var_pairs as pickle')
 
+
+###############################################################################
     elif mode == 'metamodel':
         network = initialize_network(network)
 
@@ -235,6 +297,7 @@ if __name__ == '__main__':
         logger.info("Training metamodel")
         import metamodel
 
-# %%
 
 # %%
+
+

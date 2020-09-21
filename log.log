@@ -847,3 +847,270 @@ INFO:__main__:Data saved and script finished
 INFO:__main__:Time elapsed 24.36s
 INFO:__main__:Step time 0.57s
 INFO:__main__:  
+INFO:__main__:Taking 10 smaples
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 0.87s
+INFO:__main__:Step time 0.87s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 1.11s
+INFO:__main__:Step time 0.23s
+INFO:__main__:  
+INFO:__main__:model has 9814 variables
+INFO:__main__:Presolve started
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:  
+INFO:__main__:Model loaded
+INFO:__main__:Time elapsed 580.25s
+INFO:__main__:Step time 579.14s
+INFO:__main__:  
+INFO:__main__:  
+INFO:__main__:A matrix loaded
+INFO:__main__:Time elapsed 580.47s
+INFO:__main__:Step time 0.20s
+INFO:__main__:  
+INFO:__main__:model has 9814 variables
+INFO:__main__:step 1 done 
+INFO:__main__:step 2.1 done
+INFO:__main__:step 2 done 
+INFO:__main__:-f
+INFO:__main__:Using 50 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-ba20da3a-f76a-490f-8dd8-06e33e2b3f85.json random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:-f
+INFO:__main__:Using 50 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-a78f5f96-d3d8-42a0-85c8-21792175b5c7.json random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:-f
+INFO:__main__:Using 50 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-a78f5f96-d3d8-42a0-85c8-21792175b5c7.json random samples, 50 snapshots
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:-f
+INFO:__main__:Using 5 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-350b6954-39b4-4739-b050-e517ae7b095a.json random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:-f
+INFO:__main__:Using 5 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-39c01e3f-99d3-4140-af42-86666eb37468.json random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:-f
+INFO:__main__:Using 5 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-39c01e3f-99d3-4140-af42-86666eb37468.json random samples, 5 snapshots
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:-f
+INFO:__main__:Using 5 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-39042bf2-79ac-435e-a37d-63b3c39571b8.json random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:-f
+INFO:__main__:Using 5 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-9b6f71e4-8052-49a3-90bc-ed3c3890ae3f.json random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:-f
+INFO:__main__:Using 5 snapshots
+INFO:__main__:/run/user/1001/snap.code/jupyter/kernel-9a392548-b952-4c1f-8d57-892f32a738bf.json random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:Using 5 snapshots
+INFO:__main__:30 random samples, 5 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 50 snapshots
+INFO:__main__:30 random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:Using 50 snapshots
+INFO:__main__:30 random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 50 snapshots
+INFO:__main__:30 random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 50 snapshots
+INFO:__main__:30 random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 50 snapshots
+INFO:__main__:30 random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:saved var_pairs as pickle
+INFO:__main__:Using 50 snapshots
+INFO:__main__:30 random samples, 50 snapshots
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:pypsa.io:Imported network euro_95 has buses, carriers, generators, global_constraints, links, loads
+INFO:pypsa.opf:Performed preliminary steps
+INFO:pypsa.opf:Building pyomo model using `angles` formulation
+INFO:pypsa.opf:Solving model using gurobi
+INFO:pypsa.opf:Optimization successful
+INFO:__main__:saved model .lp file
+INFO:__main__:Process-1 started
+INFO:__main__:Process-2 started
+INFO:__main__:Process-3 started
+INFO:__main__:Process-4 started
+INFO:__main__:Waiting for jobs to finish
+INFO:__main__:waiting to join Process-1
+INFO:__main__:joined Process-1
+INFO:__main__:waiting to join Process-2
+INFO:__main__:joined Process-2
+INFO:__main__:waiting to join Process-3
+INFO:__main__:joined Process-3
+INFO:__main__:waiting to join Process-4
+INFO:__main__:joined Process-4
+INFO:__main__:symbol cuid pars == symbol refs
+INFO:__main__:saved var_pairs as pickle
