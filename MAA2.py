@@ -67,13 +67,13 @@ class dataFrames:
         logger.info('data saved')
 
 
-def presolve(A,b,sense):
+def presolve(A,b,sense,m):
     # The presolve algorithm will find a fully dimensional sub problem to the original problem
     # given in A. 
     logger.info('Presolve started')
     A,b,H,c = step1(A,b,sense)
     A,b,H,c = step2(A,b,H,c)
-    A,b,N,x_0 = step3(A,b,H,c)
+    A,b,N,x_0 = step3(A,b,H,c,m)
 
     return A,b,N,x_0
 
@@ -182,16 +182,18 @@ def step2(A,b,H,c):
     A,b,H,c = step2_2(A,b,H,c,ub_idx,ub_idb,lb_idx,lb_idb)
     return A,b,H,c
 
-def step3(A,b,H,c):
+def step3(A,b,H,c,m):
     # Step 3
     # Compute null space of H and remove all equalities 
     if H.shape[0]>0:
         #N = scipy.sparse.csr_matrix(scipy.linalg.null_space(H.toarray()))
-        N = calc_null_space3(H,tjek=True)
+        N = calc_null_space(H,tjek=True)
         # find x0 
         #res = scipy.optimize.linprog(c=np.zeros(A.shape[1]),A_ub=A,b_ub=b,A_eq=H,b_eq=c)
         #x_0 = res.x
-        x_0 = find_feasible_solution(A,b,H,c)
+        #x_0 = find_feasible_solution(A,b,H,c)
+        m.optimize()
+        x_0 = m.X
 
         A_new = A.dot(N)
         b_new = b - A.dot(x_0)
@@ -217,7 +219,7 @@ def calc_null_space(A_spar,tjek=False):
 
 def calc_null_space3(A_spar,tjek=False):
     eps = 1e-12
-    u, s, vh = scipy.sparse.linalg.svds(A_spar,k=min(A.shape)-1,which='SM',tol=eps)
+    u, s, vh = scipy.sparse.linalg.svds(A_spar,k=min(A_spar.shape)-1,which='SM',tol=eps)
     N= scipy.sparse.csr_matrix(scipy.compress(s<=eps,vh,axis=0).T)
     if tjek :
         if A_spar.dot(N).max()>1e-3:
@@ -278,7 +280,7 @@ def find_feasible_solution(A,b,H=None,c=None):
         m_reduced.addMConstrs(H, x , GRB.EQUAL ,c, name="c_eq")
     m_reduced.update()
     m_reduced.setParam('NumericFocus',3)
-    m_reduced.setParam('ScaleFlag',0)
+    #m_reduced.setParam('ScaleFlag',0)
     m_reduced.optimize()
     z_0 = x.X
     return z_0
@@ -343,7 +345,7 @@ if __name__=='__main__':
     logger.info('model has {} variables'.format(A_spar.shape[1]))
 
     # %% Presolve model
-    A_new,b_new,N,x_0 = presolve(A_spar,b,sense)
+    A_new,b_new,N,x_0 = presolve(A_spar,b,sense,m)
     t.print('Presolve performed')
 
     #%% Finding intial solution to z problem
