@@ -15,7 +15,8 @@ from pyomo.core import ComponentUID
 import pickle
 import sys 
 import logging
-from multiprocessing import Lock, Process, Queue, current_process
+from multiprocessing import Lock, Process, Queue, current_process, set_start_method
+import multiprocessing 
 import queue
 import time 
 
@@ -42,7 +43,7 @@ def setup_logging():
 
 def import_network(Snapshots):
     network = pypsa.Network()
-    network.import_from_hdf5('euro_95')
+    network.import_from_hdf5('models/euro_test')
     network.snapshots = network.snapshots[0:Snapshots]
     return network
 
@@ -159,6 +160,12 @@ def rand_split(n):
     return rand_list
 
 
+def get_symbol_cuid_pairs_seriel(symbol_map):
+    symbol_cuid_pairs = dict(
+                (symbol, ComponentUID(var_weakref()))
+                for symbol, var_weakref in symbol_map.bySymbol.items())
+    return symbol_cuid_pairs
+
 def get_symbol_cuid_pairs(symbol_map,n_jobs=4):
 
     # Generate dict with var number and reference
@@ -220,57 +227,69 @@ def get_symbol_cuid_pairs(symbol_map,n_jobs=4):
 
     return symbol_cuid_pairs
 
-      
+
+
+def add_MGA_constraint(network,MGA_slack=0.2):
+        network.lopf(formulation='angles',solver_name='gurobi',)
+        old_objective_value = network.objective
+        model = network.model
+        MGA_slack = 0.2
+        # Add the MGA slack constraint.
+        model.mga_constraint = pyomo_env.Constraint(expr=model.objective.expr*1e-9 <= 
+                                                ((1 + MGA_slack) * old_objective_value)*1e-9 )
+        return network,model
+
+def save_model(network,model,name):
+        # Saving model as .lp file
+        _, smap_id = model.write(name+".lp",)
+        logger.info('saved model .lp file')
+        # Creating symbol map, such that variables can be maped back from .lp file to pyomo model
+        symbol_map = model.solutions.symbol_map[smap_id]
+        # parallel processing - only work on linux
+        #symbol_cuid_pairs = get_symbol_cuid_pairs(symbol_map,n_jobs=os.cpu_count())
+        # seriel processing
+        symbol_cuid_pairs = get_symbol_cuid_pairs_seriel(symbol_map)
+
+        # Pickeling variable pairs 
+        with open(name+'.pickle', 'wb') as handle:
+            pickle.dump(symbol_cuid_pairs, handle, protocol=pickle.HIGHEST_PROTOCOL)  
+        logger.info('saved var_pairs as pickle')
+
 
 #%%
-__name__ = '__main__'
+
 mode = 'sampling'
 if __name__ == '__main__':
+    #multiprocessing.set_start_method('spawn')
     logger = setup_logging()
 
-    mode = 'sampling'
     try :
         logger.info(sys.argv[1] )
         Snapshots = int(sys.argv[1] )
     except :
-        Snapshots = 50
-    try :
-        n_rand_points = sys.argv[2]
-    except :
-        n_rand_points = 30
+        Snapshots = 2
+
+
+
     logger.info('Using {} snapshots'.format(Snapshots))
-    logger.info("{} random samples, {} snapshots".format(n_rand_points,Snapshots))
+    logger.info("{} snapshots".format(Snapshots))
 
     network = import_network(Snapshots)
 
     if mode == 'sampling':
 
-        #model = pypsa.opf.network_lopf_build_model(network)
-        #test = model.write("test.lp")
-
-        network.lopf(formulation='angles',solver_name='gurobi',)
-        old_objective_value = network.objective
-        model = network.model
-        MGA_slack = 0.1
-        # Add the MGA slack constraint.
-        model.mga_constraint = pyomo_env.Constraint(expr=model.objective.expr <= 
-                                                (1 + MGA_slack) * old_objective_value)
-
-        # Saving model as .lp file
-        _, smap_id = model.write("model_small.lp",)
-        logger.info('saved model .lp file')
-        # Creating symbol map, such that variables can be maped back from .lp file to pyomo model
-        symbol_map = model.solutions.symbol_map[smap_id]
-        symbol_cuid_pairs = get_symbol_cuid_pairs(symbol_map,n_jobs=os.cpu_count())
-
-        # Pickeling variable pairs 
-        with open('model_small_vars.pickle', 'wb') as handle:
-            pickle.dump(symbol_cuid_pairs, handle, protocol=pickle.HIGHEST_PROTOCOL)  
-        logger.info('saved var_pairs as pickle')
+        network,model = add_MGA_constraint(network,MGA_slack=0.2)
+        save_model(network,model,name='models/large_model')
 
 
 ###############################################################################
     elif mode == 'metamodel':
+        try :
+            n_rand_points = sys.argv[2]
+        except :
+            n_rand_points = 30
+
+
         network = initialize_network(network)
 
 

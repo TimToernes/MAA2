@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 2.9 $
+% $ biblatex bbl format version 3.1 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -17,6 +17,120 @@
 \endgroup
 
 \datalist[entry]{none/global//global/global}
+  \entry{chen_fast_nodate}{article}{}
+    \name{author}{4}{}{%
+      {{hash=CY}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Yuansi},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=DR}{%
+         family={Dwivedi},
+         familyi={D\bibinitperiod},
+         given={Raaz},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=WMJ}{%
+         family={Wainwright},
+         familyi={W\bibinitperiod},
+         given={Martin\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=YB}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Bin},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CY+1}
+    \strng{fullhash}{CYDRWMJYB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We propose and analyze two new {MCMC} sampling algorithms, the Vaidya walk
+  and the John walk, for generating samples from the uniform distribution over
+  a polytope. Both random walks are sampling algorithms derived from interior
+  point methods. The former is based on volumetric-logarithmic barrier
+  introduced by Vaidya whereas the latter uses John’s ellipsoids. We show
+  that the Vaidya walk mixes in signiﬁcantly fewer steps than the
+  logarithmic-barrier based Dikin walk studied in past work. For a polytope in
+  Rd deﬁned by n {\textgreater} d linear constraints, we show that the mixing
+  time from a warm start is bounded as O n0.5d1.5 , compared to the O (nd)
+  mixing time bound for the Dikin walk. The cost of each step of the Vaidya
+  walk is of the same order as the Dikin walk, and at most twice as large in
+  terms of constant pre-factors. For the John walk, we prove an O d2.5 ·
+  log4(n/d) bound on its mixing time and conjecture that an improved variant of
+  it could achieve a mixing time of O d2 · poly-log(n/d) . Additionally, we
+  propose variants of the Vaidya and John walks that mix in polynomial time
+  from a deterministic starting point. The speed-up of the Vaidya walk over the
+  Dikin walk are illustrated in numerical examples.%
+    }
+    \field{pages}{86}
+    \field{title}{Fast {MCMC} Sampling Algorithms on Polytopes}
+    \field{langid}{english}
+    \verb{file}
+    \verb Chen et al. - Fast MCMC Sampling Algorithms on Polytopes.pdf:C\:\\Use
+    \verb rs\\Tim\\Zotero\\storage\\V5IICKX3\\Chen et al. - Fast MCMC Sampling
+    \verb Algorithms on Polytopes.pdf:application/pdf
+    \endverb
+  \endentry
+
+  \entry{kiatsupaibul_analysis_2011}{article}{}
+    \name{author}{3}{}{%
+      {{hash=KS}{%
+         family={Kiatsupaibul},
+         familyi={K\bibinitperiod},
+         given={Seksan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SRL}{%
+         family={Smith},
+         familyi={S\bibinitperiod},
+         given={Robert\bibnamedelima L.},
+         giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=ZZB}{%
+         family={Zabinsky},
+         familyi={Z\bibinitperiod},
+         given={Zelda\bibnamedelima B.},
+         giveni={Z\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KSSRLZZB1}
+    \strng{fullhash}{KSSRLZZB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1145/1921598.1921600
+    \endverb
+    \field{issn}{1049-3301, 1558-1195}
+    \field{number}{3}
+    \field{pages}{1\bibrangedash 11}
+    \field{shortjournal}{{ACM} Trans. Model. Comput. Simul.}
+    \field{title}{An analysis of a variation of hit-and-run for uniform
+  sampling from general regions}
+    \verb{url}
+    \verb https://dl.acm.org/doi/10.1145/1921598.1921600
+    \endverb
+    \field{volume}{21}
+    \field{langid}{english}
+    \verb{file}
+    \verb Kiatsupaibul et al. - 2011 - An analysis of a variation of hit-and-ru
+    \verb n for unif.pdf:C\:\\Users\\Tim\\Zotero\\storage\\KXR7SM3P\\Kiatsupaib
+    \verb ul et al. - 2011 - An analysis of a variation of hit-and-run for unif
+    \verb .pdf:application/pdf
+    \endverb
+    \field{journaltitle}{{ACM} Transactions on Modeling and Computer
+  Simulation}
+    \field{month}{03}
+    \field{year}{2011}
+    \field{urlday}{01}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
+  \endentry
+
   \entry{ConvexOpimization}{book}{}
     \name{author}{2}{}{%
       {{hash=BS}{%
@@ -41,6 +155,27 @@
     \field{labeltitlesource}{title}
     \field{title}{Convex Optimization}
     \field{year}{2004}
+  \endentry
+
+  \entry{Hyde}{article}{}
+    \name{author}{1}{}{%
+      {{hash=HS}{%
+         family={Hyde},
+         familyi={H\bibinitperiod},
+         given={Scott},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HS1}
+    \strng{fullhash}{HS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{2}
+    \field{title}{Orthonormal Basis for the Column Space and the Null Space
+  using the QR Decomposition}
+    \verb{url}
+    \verb https://jekyll.math.byuh.edu/courses/m343/handouts/qrbasis.pdf
+    \endverb
   \endentry
 
   \entry{Smith1984}{article}{}

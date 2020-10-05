@@ -19,7 +19,7 @@
 
 \begin{document}
 	
-The goal of this method is to evenly sample the near-optimal feasible decision space of a linear optimization model using a version of Markov Chain Monte Carlo sampling named the hit and run algorithm.
+The goal of this method is to evenly sample the near-optimal feasible decision space of a linear optimization model using a version of Markov Chain Monte Carlo (MCMC) sampling named the hit and run algorithm \cite{chen_fast_nodate, kiatsupaibul_analysis_2011}.
 	
 \section{Model}
 
@@ -57,10 +57,10 @@ In order to apply the hit and run sampling algorithm, a fully dimensional space 
 
 The goal of the presolve process is to define the fully dimensional subspace $Z$ of $F$. 
 
-% step 1
+\subsection{Step 1}
 Initially all linearly dependent constraints/rows in the augmented matrix $[ A|\mathbf{b}] $ are identified. Linearly dependent constraints/rows, span parallel hyper-planes in $F$. If two such hyper-planes were to coincide, and have normal vectors pointing in opposite directions, they constrain a dimension of $F$ and can be represented as an equality rather than two inequalities. For all such inequality constraints constraining a dimension of $F$, their given row in $A$ are moved from the matrix $A$ to the $H$ matrix.
 
-% step 2
+\subsection{Step 2}
 From \cite{ConvexOpimization} (p. 523) we know that the problem can be reformulated as: 
 
 \begin{align}
@@ -92,6 +92,21 @@ With $\hat{A}$ and $ \mathbf{\hat{b}}$:
 
 By validating that the matrix $\hat{A}$ has full rank, we know that the subspace $Z$ is fully dimensional. 
 
+\subsection{Calculating the Null space $N$}
+
+Using QR decomposition the Null space of a matrix can be calculated. 
+
+Given the $(m \times n)$matrix $H$, it can be decomposed to the orthogonal $(m\times m)$ matrix Q, and R which is a $(m \times n)$ upper triangular matrix. 
+
+\begin{equation}
+	H = QR = \left[Q_1  Q_2 \right] \left[{R_1 \atop 0} \right]
+\end{equation}
+
+Where $Q_1$ is $(m \times r )$ and $Q_2$ $(m\times m-r)$, with $r$ being the rank of $H$. 
+
+The null space of $H$ is can then by found as $Q_2 = N(H^T)$
+
+For proof see \cite{Hyde}
 \section{Hit and run sampling}
 
 A version of the hit and run algorithm \cite{Smith1984}, is used to sample the subspace $Z$. The algorithm consist of an iterative process of drawing random directions, and taking steps of random lengths within the space $Z$. 

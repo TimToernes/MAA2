@@ -72,7 +72,7 @@ def presolve(A,b,sense,m):
     # given in A. 
     logger.info('Presolve started')
     A,b,H,c = step1(A,b,sense)
-    A,b,H,c = step2(A,b,H,c)
+    #A,b,H,c = step2(A,b,H,c)
     A,b,N,x_0 = step3(A,b,H,c,m)
 
     return A,b,N,x_0
@@ -267,20 +267,21 @@ def tjek_sample(x,A,sense,b):
     else :
         print('sample ok')
 
-def find_feasible_solution(A,b,H=None,c=None):
+def find_feasible_solution(A,b,H=None,c=None,obj=None):
     logger.info('Finding feasible solution')
     # find a feasible solutions to a problem consiting only of inequalities 
     # Problem should be on the form A*x=b
     m_reduced = gp.Model("matrix1")
     x = m_reduced.addMVar(shape=A.shape[1], name="x")
-    obj = np.zeros(A.shape[1])
+    if type(obj) == type(None):
+        obj = np.zeros(A.shape[1])
     m_reduced.setObjective(obj @ x, GRB.MAXIMIZE)
     m_reduced.addMConstrs(A, x , GRB.LESS_EQUAL, b, name="c_ineq")
     if H != None:
         m_reduced.addMConstrs(H, x , GRB.EQUAL ,c, name="c_eq")
     m_reduced.update()
     m_reduced.setParam('NumericFocus',3)
-    #m_reduced.setParam('ScaleFlag',0)
+    m_reduced.setParam('ScaleFlag',2)
     m_reduced.optimize()
     z_0 = x.X
     return z_0
@@ -328,10 +329,10 @@ if __name__=='__main__':
         n_samples = 10
     logger.info('Taking {} smaples'.format(n_samples))   
     # %% Load model from .lp file
-    m = gp.read('model_small.lp')
+    m = gp.read('test.lp')
     #m.printStats()
     # Load variable mapping 
-    with open('model_small_vars.pickle', 'rb') as handle:
+    with open('var_pairs.pickle', 'rb') as handle:
         symbol_cuid_pairs = pickle.load(handle)
 
     t.print('Model loaded')
@@ -347,14 +348,20 @@ if __name__=='__main__':
     # %% Presolve model
     A_new,b_new,N,x_0 = presolve(A_spar,b,sense,m)
     t.print('Presolve performed')
-
+    logger.info("{} nonzero values in N".format(N.nnz))
+    logger.info("{} nonzero values in A_new".format(A_new.nnz))
     #%% Finding intial solution to z problem
     z_0 = find_feasible_solution(A_new,b_new)
     t.print('Feasible solution to reduced problem found')
 
     #%% Sample 
     logger.info('Sampling started')
-    z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples,time_max=10)
+    z_samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_0,n=n_samples,time_max=1)
+    #p = Polytope(A=A_new.toarray(),b=b_new)
+    #hr = HitAndRun(polytope=p,starting_point=z_0)
+    #z_samples = hr.get_samples(n_samples=100,thin=100)
+    
+    
     t.print('Done sampling')
     x_samples = decrush(z_samples,N,x_0)
     t.print('Done decrushing')
@@ -365,6 +372,39 @@ if __name__=='__main__':
     df.save()
     t.print('Data saved and script finished')
 
+#%%
+from hitandrun.hitandrun import HitAndRun
+from hitandrun.polytope import Polytope
+
+
+#p = Polytope(A=A_new,b=scipy.sparse.csr_matrix(b_new).T)
+p = Polytope(A=A_test.toarray(),b=np.array(b_test))
+hr = HitAndRun(polytope=p,starting_point=z_list[1])
+samples = hr.get_samples(n_samples=100)
+
+#%%
+samples = rand_walk_sample(A=A_new,b=b_new,x_0=z_test,n=n_samples,time_max=60)
+
+#%%
+
+z_list = []
+
+for i in range(10):
+    z_new = (find_feasible_solution(A_new,b_new,obj=np.random.uniform(size=A_new.shape[1],low=-1,high=1)))
+    if max(A_new.dot(z_new)-b_new)<1e-6:
+        z_list.append(z_new)
+    z_test = np.mean(z_list,axis=0)
+    if max(A_new.dot(z_test)-b_new)<0:
+        print('test')
+        break
+
+#%%
+p = m.presolve()
+A_test = p.getA()
+b_test = p.getAttr('rhs')
+
+z_test = find_feasible_solution(A_test,b_test,obj=np.random.rand(A_test.shape[1]))
+rand_walk_sample(A=A_test,b=b_test,x_0=z_test,n=n_samples,time_max=10)
 
 #%%
 """
