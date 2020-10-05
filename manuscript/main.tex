@@ -159,7 +159,18 @@ Having sampled $Z$, these sample points must be reverted back to the $F$ domain.
 
 Repeating this for all samples a set containing $d$ samples in $F$ is obtained. 
 
-\section{Further work}
+
+\section{Application}
+	Currently the method has been implemented, with a working presolve and samling method. The model works on Pypsa models and has been run on the Prime server. All code available at :	https://github.com/TimToernes/MAA2 
+
+
+\section{Issues with this method}
+
+	The hit and run sampler must operate on the entire problem. Meaning that all variables included in the model is part of the problem. The network models considered consist of $\approx 100$ investment variable and $\approx 1e9$	time dependent variables. As it is only the investment variables that is of true interest, the problem becomes extremely large due to the time dependent variables. Currently I have not determined a method of separating the investment and time dependent variables into two separate problems. Methods such as benders-decomposition has been considered. 
+	
+	As the mixing time (number of samples needed) has complexity $O(n^3)$ for the hit and run algorithm, it is simply not feasible to draw enough samples, as it would require years of computing. Therefore this method has been discarded for now. The method has however been found feasible for problems up to $d=1000$. 
+
+\section{Ideas for further work}
 
 Figure out if sampling $Z$ evenly, generates evenly distributed samples in $F$ when samples are maped from $Z$ to $F$. \\
 
